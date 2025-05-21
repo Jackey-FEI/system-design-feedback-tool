@@ -1,0 +1,16 @@
+# add all the requirements for the project
+
+# Core dependencies
+modelcontextprotocol>=0.1.0  # For MCP server and tools
+langchain>=0.1.0  # For RAG functionality
+langchain-community>=0.1.0  # For vector stores and embeddings
+chromadb>=0.4.0  # For Chroma vector store
+sentence-transformers>=2.2.0  # For HuggingFace embeddings
+
+# Web scraping and HTTP
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Utilities
+python-dotenv>=1.0.0  # For environment variables
+typing-extensions>=4.8.0  # For type hints

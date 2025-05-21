@@ -1,0 +1,4 @@
+{
+    "project_name": "systemdesign",
+    "rag_parameters": "./rag_parameters.json"
+}

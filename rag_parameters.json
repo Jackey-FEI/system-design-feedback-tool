@@ -1,0 +1,16 @@
+{
+    "project_name": "systemdesign",
+    "embed_model": "all-MiniLM-L6-v2",
+    "base_url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/",
+    "topics": [
+        "bitly",
+        "uber",
+        "dropbox",
+        "gopuff",
+        "leetcode",
+        "tinder",
+        "ticketmaster",
+        "youtube",
+        "web-crawler"
+    ]
+}
