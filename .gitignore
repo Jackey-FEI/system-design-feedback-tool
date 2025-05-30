@@ -6,6 +6,9 @@ dist/
 wheels/
 *.egg-info
 documents/
+*.yaml
+async_utils.py
+prompts/
 
 # Virtual environments
 .venv

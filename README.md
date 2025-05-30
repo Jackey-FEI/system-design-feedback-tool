@@ -6,6 +6,28 @@ Plan:
 - Self design an agent
 </br>
 
+# Version 2.0.0
+POC agent added. It leverage [MCP-Agent](https://github.com/lastmile-ai/mcp-agent)
+- Use streamlit to build a simple frontend
+- It can use RAG to get sample similar answers from HellowInterview
+- It automatically chooses prompts provided by server.
+
+## How to use
+1. Get the required packages
+```bash
+pip3 install -r requirements_client.txt
+```
+2. Set up configuration
+```bash
+cp config_client.example.yaml config_client.yaml
+```
+3. Run the client(agent side)
+```bash
+streamlit run client_app.py
+```
+4. Open the MCP client and connect to the server
+5. Start the review process
+
 # Version 1.0.0
 This is a tool to help us to review the design of a system.
 - It can use RAG to get example answers from the internet
