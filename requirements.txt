@@ -1,16 +1,35 @@
-# add all the requirements for the project
+# Web interface frameworks
+gradio>=4.38          # async-friendly front-end with FastAPI/uvicorn bundled
+streamlit>=1.28.0     # alternative web framework
 
-# Core dependencies
-modelcontextprotocol>=0.1.0  # For MCP server and tools
-langchain>=0.1.0  # For RAG functionality
+# MCP / LLM tooling
+mcp-agent>=0.1.1      # lastmile-ai MCP framework (tools, prompts, gen_client)
+openai>=1.14          # OpenAI Python SDK used by OpenAIAugmentedLLM
+modelcontextprotocol>=0.1.0
+fastmcp
+
+# Retrieval-Augmented Generation back-end
+langchain>=0.1.0      # For RAG functionality
 langchain-community>=0.1.0  # For vector stores and embeddings
-chromadb>=0.4.0  # For Chroma vector store
+chromadb>=0.4.0       # For Chroma vector store
+qdrant-client>=1.7    # if rag_engine.py talks to a local/remote Qdrant
 sentence-transformers>=2.2.0  # For HuggingFace embeddings
 
-# Web scraping and HTTP
-requests>=2.31.0
+# HTTP and async support
+aiohttp>=3.9          # HTTP transport layer (mcp-agent + qdrant need it)
+httpx>=0.27           # non-blocking HTTP calls elsewhere in code
+requests    # HTTP requests
+aiofiles>=23.0.0  # async file operations
+
+# Web scraping
 beautifulsoup4>=4.12.0
 
-# Utilities
-python-dotenv>=1.0.0  # For environment variables
+# Config / data helpers
+pyyaml>=6.0           # loads mcp_agent.config.yaml, etc.
+pydantic>=2.6         # data-model validation inside mcp-agent
+python-dotenv>=1.0    # optional: load OPENAI_API_KEY from .env
 typing-extensions>=4.8.0  # For type hints
+
+# Development and server tools
+uvicorn[standard]>=0.29  # if you ever serve FastAPI endpoints directly
+watchfiles>=0.21        # hot-reload for dev scripts

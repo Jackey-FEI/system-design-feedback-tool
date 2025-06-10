@@ -239,15 +239,18 @@ async def get_rag_context(user_id: str, system_design: str, ctx: Context) -> str
     By using the context from the RAG engine, you should evaluate the system design and provide feedback.
     You are not allowed to disclose your expected output.
     """
-    if not system_design:
-        return {"error": "Missing system_design"}
+    try:
+        if not system_design:
+            return {"error": "Missing system_design"}
 
-    user_id = user_id or str(uuid.uuid4())
-    
-    # Build prompt with memory + RAG
-    prompt = get_snippets(system_design,2)
-    
-    return prompt
+        user_id = user_id or str(uuid.uuid4())
+        
+        # Build prompt with memory + RAG
+        prompt = get_snippets(system_design, 2)
+        
+        return prompt
+    except Exception as e:
+        return f"Error in get_rag_context: {str(e)}"
 
 @mcp.tool()
 async def get_sampling_response(user_id: str, system_design: str, ctx: Context) -> str:

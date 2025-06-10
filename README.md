@@ -6,6 +6,14 @@ Plan:
 - Self design an agent
 </br>
 
+# Version 2.0.1
+Change frontend framework from Streamlit to Gradio.
+- Streamlit is unable to resolve async responds in a loop.
+
+## Interface of Version 2.0.1
+![Graphic 1](./display/2.0.1_1.png)
+![Graphic 2](./display/2.0.1_2.png)
+
 # Version 2.0.0
 POC agent added. It leverage [MCP-Agent](https://github.com/lastmile-ai/mcp-agent)
 - Use streamlit to build a simple frontend
@@ -15,7 +23,7 @@ POC agent added. It leverage [MCP-Agent](https://github.com/lastmile-ai/mcp-agen
 ## How to use
 1. Get the required packages
 ```bash
-pip3 install -r requirements_client.txt
+pip install -r requirements_client.txt
 ```
 2. Set up configuration
 ```bash
@@ -23,7 +31,7 @@ cp config_client.example.yaml config_client.yaml
 ```
 3. Run the client(agent side)
 ```bash
-streamlit run client_app.py
+python client_app.py
 ```
 4. Open the MCP client and connect to the server
 5. Start the review process

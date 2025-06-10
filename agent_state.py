@@ -33,19 +33,20 @@ async def get_agent_state(
         **agent_kwargs: Arguments for agent instantiation
     """
    
-    # Create new agent
-    agent = agent_class(
+    if key not in st.session_state:
+        # Create new agent
+        agent = agent_class(
             connection_persistence=True,
             **agent_kwargs,
-    )
-    await agent.initialize()
+        )
+        await agent.initialize()
 
-    # Attach LLM if specified
-    llm = None
-    if llm_class:
-        llm = await agent.attach_llm(llm_class)
-
-    state: AgentState = AgentState(agent=agent, llm=llm)
-    st.session_state[key] = state
-
+        # Attach LLM if specified
+        llm = None
+        if llm_class:
+            llm = await agent.attach_llm(llm_class)
+        state: AgentState = AgentState(agent=agent, llm=llm)
+        st.session_state[key] = state
+    else:
+        state = st.session_state[key]
     return state
