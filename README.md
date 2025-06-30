@@ -3,7 +3,7 @@ This project is still building.👷‍♂️
 
 Plan:
 - Continue calibrating prompts for different phases of design review
-- Self design an agent
+- Self design an agent (99% ☑️)
 </br>
 
 # Version 2.0.1
@@ -13,6 +13,9 @@ Change frontend framework from Streamlit to Gradio.
 ## Interface of Version 2.0.1
 ![Graphic 1](./display/2.0.1_1.png)
 ![Graphic 2](./display/2.0.1_2.png)
+
+## Architect Design
+![Architect](./display/agent_design.png)
 
 # Version 2.0.0
 POC agent added. It leverage [MCP-Agent](https://github.com/lastmile-ai/mcp-agent)
@@ -27,8 +30,14 @@ pip install -r requirements_client.txt
 ```
 2. Set up configuration
 ```bash
-cp config_client.example.yaml config_client.yaml
+cp mcp_agent.config.yaml.example mcp_agent.config.yaml
 ```
+Replace the path placeholder with your repo path in mcp_agent.config.yaml
+```bash
+cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml
+```
+Replace the placeholder with your chosen model's API key in mcp_agent.secrets.yaml
+
 3. Run the client(agent side)
 ```bash
 python client_app.py

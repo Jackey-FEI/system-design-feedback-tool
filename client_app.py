@@ -128,20 +128,43 @@ class SystemDesignInterviewer:
         current_phase_info = self.phases[self.current_phase]
         
         # Get RAG context for the user's response
-        context = await self.get_phase_context(user_response)
+        # context = await self.get_phase_context(user_response)
 
         # Construct the evaluation prompt
+        # evaluation_prompt = f"""
+        # Based on the {current_phase_info['name']} phase evaluation criteria,
+        # please evaluate this response: {user_response}
+
+        # You may refer to similar system's respond answers to provide insights.
+        # Similary system's respond answers:
+        # {context}
+        
+        # System design topic: {self.system_design_topic}
+        
+        # Provide constructive feedback and determine if we should:
+        # 1. Move to next phase
+        # 2. Ask for improvements
+        # 3. Provide hints
+        
+        # IMPORTANT: Provide your evaluation directly as text. Do not use any tools or request human input.
+        # """
+
+        phase_prompt = await self.agent.get_prompt(
+            f"{current_phase_info['name']}",
+            {"system_design": self.system_design_topic}
+        )
+
         evaluation_prompt = f"""
         Based on the {current_phase_info['name']} phase evaluation criteria,
-        please evaluate this response: {user_response}
+        please evaluate this response: {user_response} based on requirement of criteria:
+        {phase_prompt}.
 
-        You may refer to similar system's respond answers to provide insights.
-        Similary system's respond answers:
-        {context}
+        You should refer to similar system's respond answers to review user's answer and provide insights.
+        Use get_rag_context tool to get similar system's respond answers.
         
         System design topic: {self.system_design_topic}
-        
-        Provide constructive feedback and determine if we should:
+
+        Then, determine if we should:
         1. Move to next phase
         2. Ask for improvements
         3. Provide hints
@@ -154,7 +177,8 @@ class SystemDesignInterviewer:
             message=evaluation_prompt
         )
         return feedback
-        
+    
+    # For debug purpose
     async def ensure_connection(self, testId: str):
         """Ensure MCP connection is still active"""
         _dump("ensure_conn", self.agent)
@@ -258,7 +282,6 @@ async def submit_response(user_input: str, conversation_history: str):
         
         # Get feedback asynchronously
         async def get_feedback():
-            await interviewer.ensure_connection("test4")
             return await interviewer.evaluate_response(user_input)
         
         feedback = await get_feedback()

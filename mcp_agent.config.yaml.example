@@ -1,0 +1,15 @@
+execution_engine: asyncio
+logger:
+  transports: [console]
+  level: debug
+  path: "logs/mcp-agent.jsonl"
+
+mcp:
+  servers:
+    system-design:
+      command: "python3"
+      args: ["server.py"]
+      cwd: "repo path here"
+
+openai:
+  default_model: gpt-4o-mini # choose your preferred model
