@@ -5,9 +5,6 @@ from mcp_agent.agents.agent import Agent
 from mcp_agent.workflows.llm.augmented_llm_openai import OpenAIAugmentedLLM
 from agent_state import get_agent_state
 import uuid
-from typing import Dict, List, Tuple
-from inspect import iscoroutine
-import threading
 
 def write_to_file(content, filename='output.txt'):
     with open(filename, 'a') as f:
@@ -128,27 +125,7 @@ class SystemDesignInterviewer:
         current_phase_info = self.phases[self.current_phase]
         
         # Get RAG context for the user's response
-        # context = await self.get_phase_context(user_response)
-
-        # Construct the evaluation prompt
-        # evaluation_prompt = f"""
-        # Based on the {current_phase_info['name']} phase evaluation criteria,
-        # please evaluate this response: {user_response}
-
-        # You may refer to similar system's respond answers to provide insights.
-        # Similary system's respond answers:
-        # {context}
         
-        # System design topic: {self.system_design_topic}
-        
-        # Provide constructive feedback and determine if we should:
-        # 1. Move to next phase
-        # 2. Ask for improvements
-        # 3. Provide hints
-        
-        # IMPORTANT: Provide your evaluation directly as text. Do not use any tools or request human input.
-        # """
-
         phase_prompt = await self.agent.get_prompt(
             f"{current_phase_info['name']}",
             {"system_design": self.system_design_topic}
